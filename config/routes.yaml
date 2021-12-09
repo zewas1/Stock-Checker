@@ -1,0 +1,3 @@
+index:
+   path: /stock
+   controller: App\Controller\StockController::index
