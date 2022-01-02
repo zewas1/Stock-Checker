@@ -97,4 +97,24 @@ class MailService
         $mail->addAddress($this->emailTo);
         $mail->Subject = self::SUBJECT;
     }
+
+    /**
+     * @param PHPMailer $mail
+     * @throws Exception
+     */
+    private function buildMailerClient(PHPMailer $mail): void
+    {
+        $mail->isSMTP();
+        $mail->Debugoutput = 'html';
+        $mail->Host = $this->host;
+        $mail->Port = $this->port;
+        $mail->SMTPSecure = 'tls';
+        $mail->SMTPAuth = true;
+
+        $mail->Username = $this->username;
+        $mail->Password = $this->password;
+        $mail->setFrom($this->username, 'stock-alerts');
+        $mail->addAddress($this->emailTo);
+        $mail->Subject = self::SUBJECT;
+    }
 }
