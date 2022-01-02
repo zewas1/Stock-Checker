@@ -59,6 +59,7 @@ class MailService
 
     /**
      * @param Stock $stock
+     *
      * @throws Exception
      */
     public function sendEmail(Stock $stock): void
@@ -71,6 +72,7 @@ class MailService
 
     /**
      * @param Stock $stock
+     *
      * @return string
      */
     private function buildMessage(Stock $stock): string
@@ -80,6 +82,7 @@ class MailService
 
     /**
      * @param PHPMailer $mail
+     *
      * @throws Exception
      */
     private function buildMailerClient(PHPMailer $mail): void
