@@ -7,6 +7,10 @@ parameters:
     api_token: '%env(string:API_TOKEN)%'
     api_uri: '%env(string:API_URI)%'
     email_to: '%env(string:EMAIL_TO)%'
+    email_host: '%env(string:EMAIL_HOST)%'
+    email_port: '%env(int:EMAIL_PORT)%'
+    email_username: '%env(string:EMAIL_USERNAME)%'
+    email_password: '%env(string:EMAIL_PASSWORD)%'
 
 services:
     # default configuration for services in *this* file
@@ -17,6 +21,11 @@ services:
             api_token: '%env(string:API_TOKEN)%'
             api_uri: '%env(string:API_URI)%'
             email_to: '%env(string:EMAIL_TO)%'
+            email_host: '%env(string:EMAIL_TO)%'
+            email_port: '%env(int:EMAIL_PORT)%'
+            email_username: '%env(string:EMAIL_USERNAME)%'
+            email_password: '%env(string:EMAIL_PASSWORD)%'
+
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -36,6 +45,10 @@ services:
     App\Service\MailService:
         arguments:
         - '%email_to%'
+        - '%email_host%'
+        - '%email_port%'
+        - '%email_username%'
+        - '%email_password%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
