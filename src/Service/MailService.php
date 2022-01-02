@@ -67,12 +67,7 @@ class MailService
         $mail = New PHPMailer();
         $this->buildMailerClient($mail);
         $mail->msgHTML($this->buildMessage($stock));
-        if (!$mail->send()) {
-            echo "Mailer Error: ";
-            echo $mail->ErrorInfo;
-        } else {
-            echo "Email sent";
-        }
+        $mail->send();
     }
 
     /**
@@ -82,7 +77,7 @@ class MailService
      */
     private function buildMessage(Stock $stock): string
     {
-        return "Stock has changed by " . $stock->getChangePercent() . "%.";
+        return "Stock" . $stock->getSymbol() . "has changed by " . $stock->getChangePercent() . "%.";
     }
 
     /**
