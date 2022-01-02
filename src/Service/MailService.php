@@ -66,12 +66,7 @@ class MailService
         $mail = New PHPMailer();
         $this->buildMailerClient($mail);
         $mail->msgHTML($this->buildMessage($stock));
-        if (!$mail->send()) {
-            echo "Mailer Error: ";
-            echo $mail->ErrorInfo;
-        } else {
-            echo "Email sent";
-        }
+        $mail->send();
     }
 
     /**
