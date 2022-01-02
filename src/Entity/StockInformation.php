@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\StockInformationRepository;
@@ -112,16 +114,27 @@ class StockInformation
      */
     private bool $isUsMarketOpen;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return float|null
+     */
     public function getChange(): ?float
     {
         return $this->change;
     }
 
+    /**
+     * @param float|null $change
+     *
+     * @return $this
+     */
     public function setChange(?float $change): self
     {
         $this->change = $change;
@@ -129,11 +142,19 @@ class StockInformation
         return $this;
     }
 
+    /**
+     * @return float|null
+     */
     public function getChangePercent(): ?float
     {
         return $this->changePercent;
     }
 
+    /**
+     * @param float|null $changePercent
+     *
+     * @return $this
+     */
     public function setChangePercent(?float $changePercent): self
     {
         $this->changePercent = $changePercent;
@@ -141,11 +162,19 @@ class StockInformation
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getCompanyName(): ?string
     {
         return $this->companyName;
     }
 
+    /**
+     * @param string|null $companyName
+     *
+     * @return $this
+     */
     public function setCompanyName(?string $companyName): self
     {
         $this->companyName = $companyName;
@@ -153,11 +182,19 @@ class StockInformation
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getCurrency(): ?string
     {
         return $this->currency;
     }
 
+    /**
+     * @param string $currency
+     *
+     * @return $this
+     */
     public function setCurrency(string $currency): self
     {
         $this->currency = $currency;
@@ -165,11 +202,19 @@ class StockInformation
         return $this;
     }
 
+    /**
+     * @return float|null
+     */
     public function getLatestPrice(): ?float
     {
         return $this->latestPrice;
     }
 
+    /**
+     * @param float|null $latestPrice
+     *
+     * @return $this
+     */
     public function setLatestPrice(?float $latestPrice): self
     {
         $this->latestPrice = $latestPrice;
@@ -177,11 +222,19 @@ class StockInformation
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getSymbol(): ?string
     {
         return $this->symbol;
     }
 
+    /**
+     * @param string $symbol
+     *
+     * @return $this
+     */
     public function setSymbol(string $symbol): self
     {
         $this->symbol = $symbol;
@@ -189,11 +242,19 @@ class StockInformation
         return $this;
     }
 
+    /**
+     * @return float|null
+     */
     public function getYearHigh(): ?float
     {
         return $this->yearHigh;
     }
 
+    /**
+     * @param float|null $yearHigh
+     *
+     * @return $this
+     */
     public function setYearHigh(?float $yearHigh): self
     {
         $this->yearHigh = $yearHigh;
@@ -201,11 +262,19 @@ class StockInformation
         return $this;
     }
 
+    /**
+     * @return float|null
+     */
     public function getYearLow(): ?float
     {
         return $this->yearLow;
     }
 
+    /**
+     * @param float|null $yearLow
+     *
+     * @return $this
+     */
     public function setYearLow(?float $yearLow): self
     {
         $this->yearLow = $yearLow;
@@ -213,11 +282,19 @@ class StockInformation
         return $this;
     }
 
+    /**
+     * @return float|null
+     */
     public function getYtdChange(): ?float
     {
         return $this->ytdChange;
     }
 
+    /**
+     * @param float|null $ytdChange
+     *
+     * @return $this
+     */
     public function setYtdChange(?float $ytdChange): self
     {
         $this->ytdChange = $ytdChange;
@@ -225,11 +302,19 @@ class StockInformation
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getIsUsMarketOpen(): ?bool
     {
         return $this->isUsMarketOpen;
     }
 
+    /**
+     * @param bool $isUsMarketOpen
+     *
+     * @return $this
+     */
     public function setIsUsMarketOpen(bool $isUsMarketOpen): self
     {
         $this->isUsMarketOpen = $isUsMarketOpen;

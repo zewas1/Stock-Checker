@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\Entity\StockInformation as Stock;
@@ -93,7 +95,6 @@ class MailService
         $mail->Port = $this->port;
         $mail->SMTPSecure = 'tls';
         $mail->SMTPAuth = true;
-
         $mail->Username = $this->username;
         $mail->Password = $this->password;
         $mail->setFrom($this->username, 'stock-alerts');
