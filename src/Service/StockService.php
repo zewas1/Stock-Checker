@@ -30,6 +30,7 @@ class StockService
     {
         $response = $this->api->makeCall($stock);
         $array = json_decode($response, true);
+
         return $this->arrayToEntity($array);
     }
 

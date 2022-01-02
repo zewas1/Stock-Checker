@@ -3,12 +3,12 @@
 namespace App\Service;
 
 use App\Entity\StockInformation as Stock;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class MailService
 {
-    private const FROM = "alert@stock-checker.com";
     private const SUBJECT = "Stock monitoring alert";
-    private const HEADERS = "From:" . self::FROM;
 
     /**
      * @var string
@@ -16,21 +16,62 @@ class MailService
     private string $emailTo;
 
     /**
-     * @param string $emailTo
+     * @var string
      */
-    public function __construct(string $emailTo){
+    private string $host;
+
+    /**
+     * @var int
+     */
+    private int $port;
+
+    /**
+     * @var string
+     */
+    private string $username;
+
+    /**
+     * @var string
+     */
+    private string $password;
+
+    /**
+     * @param string $emailTo
+     * @param string $host
+     * @param int $port
+     * @param string $username
+     * @param string $password
+     */
+    public function __construct
+    (
+        string $emailTo,
+        string $host,
+        int $port,
+        string $username,
+        string $password,
+    ) {
         $this->emailTo = $emailTo;
+        $this->host = $host;
+        $this->port = $port;
+        $this->username = $username;
+        $this->password = $password;
     }
 
     /**
      * @param Stock $stock
+     * @throws Exception
      */
     public function sendEmail(Stock $stock): void
     {
-        $emailTo = $this->emailTo;
-        $message = $this->buildMessage($stock);
-
-        mail($emailTo, self::SUBJECT, $message, self::HEADERS);
+        $mail = New PHPMailer();
+        $this->buildMailerClient($mail);
+        $mail->msgHTML($this->buildMessage($stock));
+        if (!$mail->send()) {
+            echo "Mailer Error: ";
+            echo $mail->ErrorInfo;
+        } else {
+            echo "Email sent";
+        }
     }
 
     /**
@@ -40,5 +81,25 @@ class MailService
     private function buildMessage(Stock $stock): string
     {
         return "Stock has changed by " . $stock->getChangePercent() . "%.";
+    }
+
+    /**
+     * @param PHPMailer $mail
+     * @throws Exception
+     */
+    private function buildMailerClient(PHPMailer $mail): void
+    {
+        $mail->isSMTP();
+        $mail->Debugoutput = 'html';
+        $mail->Host = $this->host;
+        $mail->Port = $this->port;
+        $mail->SMTPSecure = 'tls';
+        $mail->SMTPAuth = true;
+
+        $mail->Username = $this->username;
+        $mail->Password = $this->password;
+        $mail->setFrom($this->username, 'stock-alerts');
+        $mail->addAddress($this->emailTo);
+        $mail->Subject = self::SUBJECT;
     }
 }
