@@ -80,7 +80,7 @@ class MailService
      */
     private function buildMessage(Stock $stock): string
     {
-        return "Stock has changed by " . $stock->getChangePercent() . "%.";
+        return "Stock" . $stock->getSymbol() . "has changed by " . $stock->getChangePercent() . "%.";
     }
 
     /**
