@@ -66,12 +66,7 @@ class MailService
         $mail = New PHPMailer();
         $this->buildMailerClient($mail);
         $mail->msgHTML($this->buildMessage($stock));
-        if (!$mail->send()) {
-            echo "Mailer Error: ";
-            echo $mail->ErrorInfo;
-        } else {
-            echo "Email sent";
-        }
+        $mail->send();
     }
 
     /**
@@ -80,7 +75,27 @@ class MailService
      */
     private function buildMessage(Stock $stock): string
     {
-        return "Stock has changed by " . $stock->getChangePercent() . "%.";
+        return "Stock" . $stock->getSymbol() . "has changed by " . $stock->getChangePercent() . "%.";
+    }
+
+    /**
+     * @param PHPMailer $mail
+     * @throws Exception
+     */
+    private function buildMailerClient(PHPMailer $mail): void
+    {
+        $mail->isSMTP();
+        $mail->Debugoutput = 'html';
+        $mail->Host = $this->host;
+        $mail->Port = $this->port;
+        $mail->SMTPSecure = 'tls';
+        $mail->SMTPAuth = true;
+
+        $mail->Username = $this->username;
+        $mail->Password = $this->password;
+        $mail->setFrom($this->username, 'stock-alerts');
+        $mail->addAddress($this->emailTo);
+        $mail->Subject = self::SUBJECT;
     }
 
     /**
