@@ -37,9 +37,9 @@ class ApiCommunicationService
     {
         $token = $this->token;
         $uri = $this->uri;
+
         $client = new Client();
         $requestUrl = $this->buildUrl($token, $uri, $stock);
-
         $res = $client->request('GET', $requestUrl);
 
         return $res->getBody()->getContents();

@@ -6,17 +6,21 @@ use App\Entity\StockInformation as Stock;
 
 class StockTriggerService
 {
-    private const significantDecreasePercentage = -10;
-    private const significantIncreasePercentage = 10;
+    private const SIGNIFICANT_DECREASE_PERCENTAGE = -10;
+    private const SIGNIFICANT_INCREASE_PERCENTAGE = 10;
 
-    public function checkStock(Stock $stock)
+    /**
+     * @param Stock $stock
+     *
+     * @return bool
+     */
+    public function hasSignificantChange(Stock $stock): bool
     {
-
-    }
-
-    private function checkChange (Stock $stock){
-        if ($stock->getChangePercent() < self::significantDecreasePercentage){
-
+        if ($stock->getChangePercent() < self::SIGNIFICANT_DECREASE_PERCENTAGE ||
+            $stock->getChangePercent() > self::SIGNIFICANT_INCREASE_PERCENTAGE) {
+            return true;
         }
+
+        return false;
     }
 }
