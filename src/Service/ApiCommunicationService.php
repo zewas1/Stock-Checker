@@ -37,11 +37,8 @@ class ApiCommunicationService
      */
     public function makeCall($stock): string
     {
-        $token = $this->token;
-        $uri = $this->uri;
-
         $client = new Client();
-        $requestUrl = $this->buildUrl($token, $uri, $stock);
+        $requestUrl = $this->buildUrl($this->token, $this->uri, $stock);
         $res = $client->request('GET', $requestUrl);
 
         return $res->getBody()->getContents();
