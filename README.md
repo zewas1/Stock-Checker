@@ -22,7 +22,9 @@ e.g. localhost/StockChecker/public/index.php/stock/aapl
 2. You can run stock checking command via terminal from the root directory by typing php bin/console app:stock-check {stock symbol}
 e.g. php bin/console app:stock-check aapl
 
-Command's workflow: contacts API to gain details about the stock -> runs through the trigger service -> if any triggers are checked, triggers and email alert
+Command's workflow: contacts API to gain details about the stock -> runs through the trigger service -> if there are any triggers, sends an alert email.
+
+app:stock-check command is best used with cron service for stock checking and alert automation.
 
 #.env
 Prior to using the application .env has to be configured as per .env.example file.
