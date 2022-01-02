@@ -1,11 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
-use App\Entity\StockInformation;
-use App\Service\MailService;
 use App\Service\StockService;
-use App\Service\StockTriggerService;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,57 +18,29 @@ class StockController extends AbstractController
     private StockService $helper;
 
     /**
-     * @var StockTriggerService
-     */
-    private StockTriggerService $trigger;
-
-    /**
-     * @var MailService
-     */
-    private MailService $mail;
-
-    /**
      * @param StockService $helper
-     * @param StockTriggerService $trigger
-     * @param MailService $mail
      */
     public function __construct
     (
         StockService $helper,
-        StockTriggerService $trigger,
-        MailService $mail
     ) {
         $this->helper = $helper;
-        $this->trigger = $trigger;
-        $this->mail = $mail;
     }
 
     /**
+     * @param string $symbol
+     *
      * @return Response
      *
      * @throws GuzzleException
      */
-    #[Route('/stock', name: 'stock')]
-    public function index(): Response
+    #[Route('/stock/{symbol}', name: 'stock')]
+    public function index(string $symbol): Response
     {
-        $stock = "aapl";
-
-        $entity = $this->helper->handleStock($stock);
-
-        $this->emailTrigger($entity);
+        $entity = $this->helper->handleStock($symbol);
 
         return $this->json([
             'data' => $entity,
         ]);
-    }
-
-    /**
-     * @param StockInformation $entity
-     */
-    public function emailTrigger(StockInformation $entity): void
-    {
-        if ($this->trigger->hasSignificantChange($entity)) {
-            $this->mail->sendEmail($entity);
-        }
     }
 }
