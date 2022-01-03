@@ -7,6 +7,7 @@ namespace App\Entity;
 use App\Repository\StockInformationRepository;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=StockInformationRepository::class)
@@ -63,7 +64,7 @@ class StockInformation
     /**
      * @JMS\Type("float")
      *
-     * @ORM\Column(name="latest_price", type="float", nullable=true)
+     * @ORM\Column(name="latest_price", type="decimal", precision=5, scale= 2, nullable=true)
      *
      * @var float
      */
@@ -73,6 +74,8 @@ class StockInformation
      * @JMS\Type("string")
      *
      * @ORM\Column(type="string", length=10)
+     *
+     * @Assert\NotNull(message="Must be a valid stock symbol. For further reference check https://stockanalysis.com/stocks/")
      *
      * @var string
      */
