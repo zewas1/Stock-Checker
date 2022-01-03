@@ -14,10 +14,13 @@ Navigate to the root directory of the project (you can use cmd, gitbash, termina
 
 Install required dependencies with the following command: composer require symfony/runtime
 
+Update host configuration (optional). Go to <...>/etc/hosts file (or equivalent of your operating system) and add a line:
+127.0.0.1 stock.local
+
 There are two main uses of current application:
 
-1. You can get any stock's base information in json via route localhost/StockChecker/public/index.php/stock/{stock symbol}
-e.g. localhost/StockChecker/public/index.php/stock/aapl
+1. You can get any stock's base information in json via route stock.local/StockChecker/public/index.php/stock/{stock symbol}
+e.g. stock.local/StockChecker/public/index.php/stock/aapl
 
 2. You can run stock checking command via terminal from the root directory by typing php bin/console app:stock-check {stock symbol}
 e.g. php bin/console app:stock-check aapl
@@ -32,10 +35,10 @@ Prior to using the application .env has to be configured as per .env.example fil
 1. create an account on https://iexcloud.io/
 2. put API_TOKEN (received unique token after registration) and API_URI (https://cloud.iexapis.com/stable/stock/) on .env configuration
 3. Configure email details for triggers:
-  email_to - recipient's email address
-  email_host - smpt server hostname (for e.g. smtp.gmail.com, if you would like to send emails through google smtp server)
-  email_port - smtp port, default is 25, but if you're going to use google smtp 587 is recommended.
-  email_username - username of sender's email address e.g. some-email@gmail.com
-  email_password - password of sender's email address
+  "email_to" - recipient's email address.
+  "email_host" - smpt server hostname (for e.g. smtp.gmail.com, if you would like to send emails through google smtp server).
+  "email_port" - smtp port, default is 25, but if you're going to use google smtp 587 is recommended.
+  "email_username" - username of sender's email address e.g. some-email@gmail.com.
+  "email_password" - password of sender's email address.
 
 If you're going to be using google smpt, also check https://support.google.com/accounts/answer/6010255?hl=en this setting for configuration.
