@@ -45,7 +45,7 @@ class StockController extends AbstractController
      *
      * @throws GuzzleException
      */
-    #[Route('/stock/{symbol}', name: 'stock')]
+    #[Route('/stock/{symbol}', name: 'stock', methods:'GET')]
     public function index(string $symbol): Response
     {
         $entity = $this->helper->handleStock($symbol);
@@ -61,10 +61,8 @@ class StockController extends AbstractController
      * @return Response
      *
      * @throws GuzzleException
-     * @throws ORMException
-     * @throws OptimisticLockException
      */
-    #[Route('/stock/add/{symbol}', name: 'stock_add')]
+    #[Route('/stock/add/{symbol}', name: 'stock_save', methods: 'GET')]
     public function saveStock(string $symbol): Response
     {
         $entity = $this->helper->handleStock($symbol);
