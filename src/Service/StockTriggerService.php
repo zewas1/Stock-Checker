@@ -41,12 +41,12 @@ class StockTriggerService
 
         if ($this->highestThisYear($stock)) {
             return $this->builder->buildChangeMessage($stock->getSymbol(), self::YEAR_HIGHEST_VALUE,
-            $stock->getLatestPrice());
+                $stock->getLatestPrice());
         }
 
-        if ($this->lowestThisYear($stock)){
+        if ($this->lowestThisYear($stock)) {
             return $this->builder->buildChangeMessage($stock->getSymbol(), self::YEAR_LOWEST_VALUE,
-            $stock->getLatestPrice());
+                $stock->getLatestPrice());
         }
 
         return null;
@@ -73,7 +73,7 @@ class StockTriggerService
      */
     private function highestThisYear(Stock $stock): bool
     {
-        if ($stock->getLatestPrice() === $stock->getYearHigh()){
+        if ($stock->getLatestPrice() === $stock->getYearHigh()) {
             return true;
         }
 
@@ -82,7 +82,7 @@ class StockTriggerService
 
     private function lowestThisYear(Stock $stock): bool
     {
-        if($stock->getLatestPrice() === $stock->getYearLow()){
+        if ($stock->getLatestPrice() === $stock->getYearLow()) {
             return true;
         }
 
