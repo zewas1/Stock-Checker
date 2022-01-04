@@ -6,8 +6,6 @@ namespace App\Controller;
 
 use App\SaveHandler\StockSaveHandler;
 use App\Service\StockService;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

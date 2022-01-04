@@ -84,8 +84,9 @@ class StockCheckCommand extends Command
      */
     private function emailTrigger(StockInformation $entity): void
     {
-        if ($this->trigger->hasSignificantChange($entity)) {
-            $this->mail->sendEmail($entity);
+        $message = $this->trigger->validate($entity);
+        if ($message !== null) {
+            $this->mail->sendEmail($message);
         }
     }
 }
