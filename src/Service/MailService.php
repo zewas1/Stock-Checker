@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Entity\StockInformation as Stock;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -60,26 +59,16 @@ class MailService
     }
 
     /**
-     * @param Stock $stock
+     * @param string $message
      *
      * @throws Exception
      */
-    public function sendEmail(Stock $stock): void
+    public function sendEmail(string $message): void
     {
         $mail = New PHPMailer();
         $this->buildMailerClient($mail);
-        $mail->msgHTML($this->buildMessage($stock));
+        $mail->msgHTML($message);
         $mail->send();
-    }
-
-    /**
-     * @param Stock $stock
-     *
-     * @return string
-     */
-    private function buildMessage(Stock $stock): string
-    {
-        return "Stock" . $stock->getSymbol() . "has changed by " . $stock->getChangePercent() . "%.";
     }
 
     /**
