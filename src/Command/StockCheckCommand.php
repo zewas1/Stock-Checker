@@ -64,14 +64,19 @@ class StockCheckCommand extends Command
     }
 
     /**
-     * @throws Exception|GuzzleException
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     * @throws Exception
+     * @throws GuzzleException
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $entity = $this->helper->handleStock($input->getArgument('stock'));
         $this->emailTrigger($entity);
-    }
 
+        return 0;
+    }
     /**
      * @param StockInformation $entity
      *
