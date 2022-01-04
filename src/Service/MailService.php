@@ -47,10 +47,11 @@ class MailService
     (
         string $emailTo,
         string $host,
-        int $port,
+        int    $port,
         string $username,
         string $password,
-    ) {
+    )
+    {
         $this->emailTo = $emailTo;
         $this->host = $host;
         $this->port = $port;
@@ -65,7 +66,7 @@ class MailService
      */
     public function sendEmail(string $message): void
     {
-        $mail = New PHPMailer();
+        $mail = new PHPMailer();
         $this->buildMailerClient($mail);
         $mail->msgHTML($message);
         $mail->send();

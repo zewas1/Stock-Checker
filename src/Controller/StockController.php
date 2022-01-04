@@ -29,9 +29,10 @@ class StockController extends AbstractController
      */
     public function __construct
     (
-        StockService $helper,
+        StockService     $helper,
         StockSaveHandler $saveHandler,
-    ) {
+    )
+    {
         $this->helper = $helper;
         $this->saveHandler = $saveHandler;
     }
@@ -43,7 +44,7 @@ class StockController extends AbstractController
      *
      * @throws GuzzleException
      */
-    #[Route('/stock/{symbol}', name: 'stock', methods:'GET')]
+    #[Route('/stock/{symbol}', name: 'stock', methods: 'GET')]
     public function index(string $symbol): Response
     {
         $entity = $this->helper->handleStock($symbol);

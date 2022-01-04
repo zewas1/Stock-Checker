@@ -23,7 +23,8 @@ class ApiCommunicationService
      * @param string $token
      * @param string $uri
      */
-    public function __construct(string $token, string $uri){
+    public function __construct(string $token, string $uri)
+    {
         $this->token = $token;
         $this->uri = $uri;
     }

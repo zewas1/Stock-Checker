@@ -44,11 +44,12 @@ class StockCheckCommand extends Command
      * @param string|null $name
      */
     public function __construct(
-        StockService $helper,
+        StockService        $helper,
         StockTriggerService $trigger,
-        MailService $mail,
-        string $name = null,
-    ) {
+        MailService         $mail,
+        string              $name = null,
+    )
+    {
         $this->helper = $helper;
         $this->trigger = $trigger;
         $this->mail = $mail;
@@ -77,6 +78,7 @@ class StockCheckCommand extends Command
 
         return 0;
     }
+
     /**
      * @param StockInformation $entity
      *
