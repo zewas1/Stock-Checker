@@ -28,7 +28,7 @@ e.g. php bin/console app:stock-check aapl
 Command's workflow: contacts API to gain details about the stock -> runs through the trigger service -> if there are any triggers, sends an alert email.
 
 app:stock-check command is best used with cron service for stock checking and alert automation. Root directory has an example of script to check stock details automatically for you.
-More about crontabs and how to set them up: https://vitux.com/how-to-setup-a-cron-job-in-debian-10/
+More about cron jobs and how to set them up: https://vitux.com/how-to-setup-a-cron-job-in-debian-10/
 
 #.env
 Prior to using the application .env has to be configured as per .env.example file.
