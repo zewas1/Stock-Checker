@@ -41,4 +41,4 @@ Prior to using the application .env has to be configured as per .env.example fil
   "email_username" - username of sender's email address e.g. some-email@gmail.com.
   "email_password" - password of sender's email address.
 
-If you're going to be using google smpt, also check https://support.google.com/accounts/answer/6010255?hl=en this setting for configuration.
+If you're going to be using google smtp, also check https://support.google.com/accounts/answer/6010255?hl=en this setting for configuration.
