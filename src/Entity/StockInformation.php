@@ -32,7 +32,7 @@ class StockInformation
      *
      * @var float
      */
-    private float $change;
+    private float $changeValue;
 
     /**
      * @JMS\Type("float")
@@ -128,19 +128,19 @@ class StockInformation
     /**
      * @return float|null
      */
-    public function getChange(): ?float
+    public function getChangeValue(): ?float
     {
-        return $this->change;
+        return $this->changeValue;
     }
 
     /**
-     * @param float|null $change
+     * @param float|null $changeValue
      *
      * @return $this
      */
-    public function setChange(?float $change): self
+    public function setChangeValue(?float $changeValue): self
     {
-        $this->change = $change;
+        $this->changeValue = $changeValue;
 
         return $this;
     }

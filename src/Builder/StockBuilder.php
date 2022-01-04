@@ -17,7 +17,7 @@ class StockBuilder
     {
         $stock = new Stock();
 
-        $stock->setChange($data['change']);
+        $stock->setChangeValue($data['change']);
         $stock->setChangePercent($data['changePercent']);
         $stock->setCompanyName($data['companyName']);
         $stock->setCurrency($data['currency']);

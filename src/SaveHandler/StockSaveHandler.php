@@ -6,8 +6,6 @@ namespace App\SaveHandler;
 
 use App\Entity\StockInformation as Stock;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 
 class StockSaveHandler
 {
@@ -25,17 +23,11 @@ class StockSaveHandler
     }
 
     /**
-     * @throws OptimisticLockException|ORMException
+     * @param Stock $stock
      */
     public function save(Stock $stock)
     {
-        try {
-            $this->em->persist($stock);
-            $this->em->flush();
-        } catch (OptimisticLockException $e) {
-            $this->em->rollback();
-
-            throw $e;
-        }
+        $this->em->persist($stock);
+        $this->em->flush($stock);
     }
 }
