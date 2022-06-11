@@ -10,3 +10,5 @@
 /.idea/
 /.env
 ###< symfony/framework-bundle ###
+/nbproject/private/
+/nbproject/

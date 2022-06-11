@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Builder;
 
-use App\Entity\StockInformation as Stock;
+use App\Entity\Stock;
 
 class StockBuilder
 {
     /**
-     * @param $data
+     * @param array $data
      *
      * @return Stock
      */
-    public function buildStock($data): Stock
+    public function buildStock(array $data): Stock
     {
         $stock = new Stock();
 

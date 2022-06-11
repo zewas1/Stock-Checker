@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Builder\StockBuilder;
-use App\Entity\StockInformation as Stock;
+use App\Entity\Stock as Stock;
+use App\SaveHandler\AbstractSaveHandler;
 use GuzzleHttp\Exception\GuzzleException;
+use Symfony\Component\HttpFoundation\Response;
 
 class StockService
 {
@@ -21,27 +23,57 @@ class StockService
     private StockBuilder $builder;
 
     /**
+     * @var AbstractSaveHandler
+     */
+    private AbstractSaveHandler $saveHandler;
+
+    /**
      * @param ApiCommunicationService $api
      * @param StockBuilder $builder
+     * @param AbstractSaveHandler $saveHandler
      */
-    public function __construct(ApiCommunicationService $api, StockBuilder $builder)
+    public function __construct(ApiCommunicationService $api, StockBuilder $builder, AbstractSaveHandler $saveHandler)
     {
         $this->api = $api;
         $this->builder = $builder;
+        $this->saveHandler = $saveHandler;
     }
 
     /**
-     * @param string $stock
+     * @param string $stockSymbol
      *
-     * @return Stock
+     * @return int
      *
      * @throws GuzzleException
      */
-    public function handleStock(string $stock): Stock
+    public function createStock(string $stockSymbol): int
     {
-        $response = $this->api->makeCall($stock);
-        $array = json_decode($response, true);
+        $stock = $this->getStock($stockSymbol);
 
-        return $this->builder->buildStock($array);
+        if (!$stock){
+            return Response::HTTP_BAD_REQUEST;
+        }
+
+        $this->saveHandler->save($stock);
+
+        return Response::HTTP_OK;
+    }
+
+    /**
+     * @param string $stockSymbol
+     *
+     * @return Stock|null
+     *
+     * @throws GuzzleException
+     */
+    public function getStock(string $stockSymbol): ?Stock
+    {
+        $response = $this->api->makeApiCall($stockSymbol);
+
+        if (!$response){
+            return null;
+        }
+
+        return $this->builder->buildStock(json_decode($response, true));
     }
 }

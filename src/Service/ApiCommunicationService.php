@@ -30,30 +30,30 @@ class ApiCommunicationService
     }
 
     /**
-     * @param $stock
+     * @param string $stockSymbol
      *
-     * @return string
+     * @return string|null
      *
      * @throws GuzzleException
      */
-    public function makeCall($stock): string
+    public function makeApiCall(string $stockSymbol): ?string
     {
         $client = new Client();
-        $requestUrl = $this->buildUrl($this->token, $this->uri, $stock);
-        $res = $client->request('GET', $requestUrl);
+        $requestUrl = $this->geRequestUrl($this->token, $this->uri, $stockSymbol);
+        $response = $client->request('GET', $requestUrl);
 
-        return $res->getBody()->getContents();
+        return $response->getBody()->getContents() ?? null;
     }
 
     /**
-     * @param $token
-     * @param $uri
-     * @param $stock
+     * @param string $token
+     * @param string $uri
+     * @param string $stockSymbol
      *
      * @return string
      */
-    private function buildUrl($token, $uri, $stock): string
+    private function geRequestUrl(string $token, string $uri, string $stockSymbol): string
     {
-        return $uri . $stock . '/quote?token=' . $token;
+        return $uri . $stockSymbol . '/quote?token=' . $token;
     }
 }

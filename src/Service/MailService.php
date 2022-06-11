@@ -50,8 +50,7 @@ class MailService
         int    $port,
         string $username,
         string $password,
-    )
-    {
+    ) {
         $this->emailTo = $emailTo;
         $this->host = $host;
         $this->port = $port;

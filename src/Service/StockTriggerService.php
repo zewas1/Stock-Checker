@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Builder\MailTextBuilder;
-use App\Entity\StockInformation as Stock;
+use App\Entity\Stock as Stock;
 
 class StockTriggerService
 {
@@ -30,6 +30,7 @@ class StockTriggerService
 
     /**
      * @param Stock $stock
+     *
      * @return string|null
      */
     public function validate(Stock $stock): ?string
@@ -69,6 +70,7 @@ class StockTriggerService
 
     /**
      * @param Stock $stock
+     *
      * @return bool
      */
     private function highestThisYear(Stock $stock): bool
@@ -80,6 +82,11 @@ class StockTriggerService
         return false;
     }
 
+    /**
+     * @param Stock $stock
+     *
+     * @return bool
+     */
     private function lowestThisYear(Stock $stock): bool
     {
         if ($stock->getLatestPrice() === $stock->getYearLow()) {
