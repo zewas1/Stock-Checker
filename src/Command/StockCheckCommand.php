@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Entity\StockInformation;
+use App\Entity\Stock;
 use App\Service\StockService;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPMailer\PHPMailer\Exception;
@@ -73,20 +73,20 @@ class StockCheckCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $entity = $this->helper->handleStock($input->getArgument('stock'));
-        $this->emailTrigger($entity);
+        $stock = $this->helper->getStock($input->getArgument('stock'));
+        $this->emailTrigger($stock);
 
         return 0;
     }
 
     /**
-     * @param StockInformation $entity
+     * @param Stock $stock
      *
      * @throws Exception
      */
-    private function emailTrigger(StockInformation $entity): void
+    private function emailTrigger(Stock $stock): void
     {
-        $message = $this->trigger->validate($entity);
+        $message = $this->trigger->validate($stock);
         if ($message !== null) {
             $this->mail->sendEmail($message);
         }

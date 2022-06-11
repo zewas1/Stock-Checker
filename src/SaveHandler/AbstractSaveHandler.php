@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\SaveHandler;
 
-use App\Entity\StockInformation as Stock;
 use Doctrine\ORM\EntityManagerInterface;
 
-class StockSaveHandler
+class AbstractSaveHandler
 {
     /**
      * @var EntityManagerInterface
@@ -23,11 +22,11 @@ class StockSaveHandler
     }
 
     /**
-     * @param Stock $stock
+     * @param $entity
      */
-    public function save(Stock $stock)
+    public function save($entity): void
     {
-        $this->em->persist($stock);
-        $this->em->flush($stock);
+        $this->em->persist($entity);
+        $this->em->flush($entity);
     }
 }
