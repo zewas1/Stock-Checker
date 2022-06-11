@@ -10,7 +10,7 @@ use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=StockInformationRepository::class)
+ * @ORM\Entity(repositoryClass=StockRepository::class)
  */
 class Stock
 {
