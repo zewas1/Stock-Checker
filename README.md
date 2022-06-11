@@ -2,9 +2,9 @@
 
 In order to run this application a local web server with an SMTP server and composer are needed. You can run it with XAMPP's apache.
 
-Download xampp: https://www.apachefriends.org/download.html PHP 8.0.11 for your operating system.
+Download [xampp](https://www.apachefriends.org/download.html) PHP 8.0.11 for your operating system.
 
-Download and install composer: https://getcomposer.org/download/
+Download and install [composer](https://getcomposer.org/download/). 
 
 Start XAMPP's apache service via XAMPP control panel.
 
@@ -27,13 +27,12 @@ e.g. php bin/console app:stock-check aapl
 
 Command's workflow: contacts API to gain details about the stock -> runs through the trigger service -> if there are any triggers, sends an alert email.
 
-app:stock-check command is best used with cron service for stock checking and alert automation. Root directory has an example of script to check stock details automatically for you.
-More about cron jobs and how to set them up: https://vitux.com/how-to-setup-a-cron-job-in-debian-10/
+app:stock-check command is best used with [cron service](https://vitux.com/how-to-setup-a-cron-job-in-debian-10/) for stock checking and alert automation. Root directory has an example of script to check stock details automatically for you.
 
 #.env
 Prior to using the application .env has to be configured as per .env.example file.
 
-1. create an account on https://iexcloud.io/
+1. create an [iex cloud](https://iexcloud.io/) account.
 2. put API_TOKEN (received unique token after registration) and API_URI (https://cloud.iexapis.com/stable/stock/) on .env configuration
 3. Configure email details for triggers:
   "email_to" - recipient's email address.
@@ -42,4 +41,11 @@ Prior to using the application .env has to be configured as per .env.example fil
   "email_username" - username of sender's email address e.g. some-email@gmail.com.
   "email_password" - password of sender's email address.
 
-If you're going to be using google smtp, also check https://support.google.com/accounts/answer/6010255?hl=en this setting for configuration.
+If you're going to be using google smtp, also check [this setting](https://support.google.com/accounts/answer/6010255?hl=en) for configuration.
+
+If you would like to simplify the route, be sure to check apache\conf\httpd-vhosts.conf and add a virtual host with an appropriate path e.g.
+
+`<VirtualHost *:80>
+DocumentRoot "C:/xampp/htdocs/stocks/public/index.php"
+ServerName stock.local   
+</VirtualHost>`
